@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+table {
+  padding: 1.1cm 1cm;
+  border-right: 1px solid black;
+  width: 21cm;
+  height: 29.7cm;
+}
+.rows {
+  display: flex;
+  flex-direction: row;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  height: calc(100% / 13);
+}
+
+.rows td {
+  padding: 10px;
+  width: calc(100% / 5);
+  height: 2.1cm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.rows td p {
+  font-size: 12px;
+  line-height: 14px;
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+}
+
+.rows td p:nth-child(3) {
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.price-only .rows td {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* container for both halves */
+.price-only .price-split {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-only .price-left,
+.price-only .price-right {
+  position: absolute;
+  top: 50%;
+  transform: translateX(22%) translateY(-50%) rotate(-90deg);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  width: 100%;
+  left: 0;
+}
+.price-only .price-right {
+  right: 0;
+  left: auto;
+  transform: translateX(-22%) translateY(-50%) rotate(90deg);
+}
+
+
+
+
+/* ====== PRINT SETTINGS ====== */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  table {
+    background-color:  white;
+    width: 21cm;
+    height: 29.7cm;
+    border-right: 1px solid black;
+    border-collapse: collapse;
+    padding: 1.1cm 1cm;
+    page-break-after: always; /* one table per page */
+  }
+
+  .rows {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc((29.7cm - 2.2cm) / 13); /* 13 rows per page minus padding */
+    page-break-inside: avoid; 
+  }
+
+  .rows td {
+    width: calc(100% / 5);
+    height: 2.1cm;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    box-sizing: border-box;
+    border: none;
+  }
+
+  .rows td p {
+    font-size: 12px;
+    line-height: 14px;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+  }
+
+  .rows td p:nth-child(3) {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+}
+
+/* ====== SCREEN SETTINGS ====== */
+@media screen {
+  html,
+  body {
+    background: #eee;
+  }
+  table {
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
