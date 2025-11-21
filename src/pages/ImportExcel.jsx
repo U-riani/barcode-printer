@@ -29,7 +29,7 @@ const ImportExcel = () => {
   return (
     <div>
       <div>
-        <h4>Import Excel</h4>
+        <h4 class="import button">Import Excel</h4>
       </div>
       <div>
         <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />

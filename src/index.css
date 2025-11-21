@@ -81,6 +81,9 @@ table {
   transform: translateX(-22%) translateY(-50%) rotate(90deg);
 }
 
+.import button {
+  background-color: red;
+}
 
 
 
