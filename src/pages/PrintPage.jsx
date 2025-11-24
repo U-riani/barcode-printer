@@ -4,12 +4,14 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { Link } from "react-router-dom";
 import "../styles/PrintPage.css"; // 👈 add this line for spinner styles
+import { useBarcode } from "../hooks/useBarcode.jsx";
 
 const PrintPage = () => {
   const { excelData } = useContext(ExcelContext);
   const containerRef = useRef();
   const [priceOnly, setPriceOnly] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false); // ✅ spinner state
+  
 
   // ✅ Collect all prices (keep duplicates)
   const allPrices = useMemo(() => {
@@ -172,12 +174,14 @@ const PrintPage = () => {
                           </td>
                         );
                       }
+                      const {BarcodeComponent} = useBarcode(item['Barcode']);
 
                       return (
                         <td key={cellIndex}>
-                          <p>{item["Barcode"]}</p>
-                          <p>{item["Sku Code"]}</p>
-                          <p>{item["Adjusted Shablon unit price"]}₾</p>
+                          {/* <p>{item["Barcode"]}</p> */}
+                          {/* <p>{item["Sku Code"]}</p> */}
+                          <div className="barcode-component"> {BarcodeComponent}</div>
+                          <p className="barcode-price">{item["Adjusted Shablon unit price"]}₾</p>
                         </td>
                       );
                     })}
