@@ -86,8 +86,6 @@ table {
   font-size: 20px;
 }
 
-
-
 /* ====== PRINT SETTINGS ====== */
 @page {
   size: A4 portrait;
@@ -101,7 +99,7 @@ table {
   }
 
   table {
-    background-color:  white;
+    background-color: white;
     width: 21cm;
     height: 29.7cm;
     border-right: 1px solid black;
@@ -115,7 +113,7 @@ table {
     flex-direction: row;
     width: 100%;
     height: calc((29.7cm - 2.2cm) / 13); /* 13 rows per page minus padding */
-    page-break-inside: avoid; 
+    page-break-inside: avoid;
   }
 
   .rows td {
@@ -136,6 +134,7 @@ table {
     line-height: 14px;
     font-family: Arial, sans-serif;
     font-weight: 600;
+    color: red;
   }
 
   .rows td p:nth-child(3) {
