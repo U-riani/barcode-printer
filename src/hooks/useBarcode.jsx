@@ -4,19 +4,20 @@ import Barcode from "react-barcode";
 export function useBarcode(value) {
   const ref = useRef(null);
 
-  const clean = String(value || "").replace(/\D/g, "");
+  const clean = String(value || "").trim();
 
-  const BarcodeComponent = (
-    <div style={{ width: "100%", padding: "0 2px" }}>
+  const BarcodeComponent = clean ? (
+    <div className="w-full  flex justify-center items-center">
       <Barcode
         value={clean}
-        format="EAN13"
-        width={0.9}        // thinner bars because 5 labels per row
-        height={20}        // 28px ≈ ~1cm visually → fits 2.1cm cell
-        fontSize={10}      // small EAN13 digits
+        format="CODE128"   // ✅ correct
+        width={0.9}
+        height={20}
+        fontSize={10}
+        displayValue={true}
       />
     </div>
-  );
+  ) : null;
 
   return { BarcodeComponent, ref };
 }

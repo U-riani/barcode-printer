@@ -7,7 +7,7 @@ const Home = () => {
     <div>
         <div style={{display: 'flex', gap: '20px', marginBottom: '20px'}}>
             <Link to='/'>Home</Link>
-            <Link to="/print">Print</Link>
+            <Link to="/print-enza">Print</Link>
         </div>
         <div>
             <ImportExcel />
