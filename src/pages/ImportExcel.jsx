@@ -21,18 +21,28 @@ const ImportExcel = () => {
 
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
       setExcelData(jsonData);
-      
-       setTimeout(() => navigate("/print-enza"), 200);
+
+      setTimeout(() => navigate("/print-enza"), 200);
     };
     reader.readAsArrayBuffer(file);
   };
   return (
-    <div>
+    <div className="flex flex-col hustify-center items-center">
       <div>
-        <h4 className="import-button">Import Excel</h4>
+        <h4 className="import-button p-3 text-xl">Import Excel</h4>
       </div>
       <div>
-        <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
+        <div className="flex flex-col justify-center items-center py-3">
+          <p className="animate-press text-lg">press</p>
+          <div className="text-4xl animate-finger">👇</div>
+        </div>
+
+        <input
+          className="border rounded p-3 flex justify-center cursor-pointer"
+          type="file"
+          accept=".xlsx, .xls"
+          onChange={handleFileUpload}
+        />
       </div>
     </div>
   );
