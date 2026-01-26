@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+* {
+  box-sizing: border-box;
+}
+
+
 @keyframes fingerBounce {
   0% {
     transform: translateY(0) scale(1);

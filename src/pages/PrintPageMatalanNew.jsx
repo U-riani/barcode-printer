@@ -79,23 +79,41 @@ export default function PrintPageMatalanNew() {
     setIsGenerating(true);
 
     try {
-      const pdf = new jsPDF("p", "mm", "a4");
+      // wait for fonts
+      await document.fonts.ready;
 
-      for (let i = 0; i < pages.length; i++) {
-        const pageEl = containerRef.current.querySelector(`#page-${i}`);
-        if (!pageEl) continue;
+      const pdf = new jsPDF({
+        orientation: "p",
+        unit: "mm",
+        format: "a4",
+        compress: false,
+      });
+
+      const pagesEls = containerRef.current.querySelectorAll("[id^='page-']");
+
+      for (let i = 0; i < pagesEls.length; i++) {
+        const pageEl = pagesEls[i];
+
+        // force exact size before capture
+        pageEl.style.width = "210mm";
+        pageEl.style.height = "297mm";
 
         const canvas = await html2canvas(pageEl, {
-          scale: 2,
+          scale: window.devicePixelRatio || 2,
+          backgroundColor: "#ffffff",
           useCORS: true,
+          logging: false,
+          imageTimeout: 0,
+          removeContainer: true,
+          foreignObjectRendering: false,
+          windowWidth: pageEl.scrollWidth,
+          windowHeight: pageEl.scrollHeight,
         });
 
-        const img = canvas.toDataURL("image/jpeg", 0.95);
-        const w = 210;
-        const h = (canvas.height * w) / canvas.width;
+        const imgData = canvas.toDataURL("image/png");
 
         if (i > 0) pdf.addPage();
-        pdf.addImage(img, "JPEG", 0, 0, w, h);
+        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
       }
 
       pdf.save(priceOnly ? "price-labels.pdf" : "barcode-labels.pdf");
@@ -103,7 +121,7 @@ export default function PrintPageMatalanNew() {
       setIsGenerating(false);
     }
   };
-  console.log(pages);
+
   /* ---------- render ---------- */
 
   return (
@@ -132,7 +150,10 @@ export default function PrintPageMatalanNew() {
       </div>
 
       {/* Pages */}
-      <div ref={containerRef} className="flex flex-col items-center gap-6 py-6">
+      <div
+        ref={containerRef}
+        className="flex flex-col items-center gap-6 py-6 print:bg-white"
+      >
         {pages.map((pageData, pageIndex) => {
           const rows = rowsFromPage(pageData);
 
@@ -156,10 +177,10 @@ export default function PrintPageMatalanNew() {
                   <div
                     key={r}
                     className="grid grid-cols-5"
-                    style={{ height: `calc((297mm - 22mm) / 13)` }}
+                    style={{ height: CELL_H }}
                   >
                     {row.map((item, i) => {
-                      <BarcodeCell value={item["Barcode"]} />;
+                      //   <BarcodeCell value={item["Barcode"]} />;
 
                       if (priceOnly) {
                         return (
