@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import PrintPage from "./pages/PrintPage.jsx";
 import PrintPageForEnza from "./pages/PrintPageForEnza.jsx";
+import PrintPageMatalanNew from "./pages/PrintPageMatalanNew.jsx";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="print" element={<PrintPage />} />
         <Route path="print-enza" element={<PrintPageForEnza />} />
+        <Route path="print-matalan" element={<PrintPageMatalanNew />} />
       </Routes>
     </>
   );
