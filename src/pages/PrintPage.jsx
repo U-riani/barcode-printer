@@ -109,23 +109,25 @@ const PrintPage = () => {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div
+      className="pt-2 px-2 bg-gradient-to-br from-zinc-900/10 via-neutral-100 to-white"
+      style={{ position: "relative" }}
+    >
       {/* Controls */}
       <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          marginBottom: "10px",
-          alignItems: "center",
-        }}
+        className="flex items-center justify-between pt-2 pb-4"
       >
         <Link to="/" style={{ pointerEvents: isGenerating ? "none" : "auto" }}>
           ⬅️ Back
         </Link>
-        <button onClick={generatePDF} disabled={isGenerating}>
+        <button
+          className="bg-gradient-to-br from-zinc-900/10 via-neutral-100 to-white   p-2 rounded-lg border border-gray-400 cursor-pointer shadow-md"
+          onClick={generatePDF}
+          disabled={isGenerating}
+        >
           {isGenerating ? "Generating..." : "Generate PDF"}
         </button>
-        <label style={{ opacity: isGenerating ? 0.5 : 1 }}>
+        <label className="cursor-pointer" style={{ opacity: isGenerating ? 0.5 : 1 }}>
           <input
             type="checkbox"
             checked={priceOnly}

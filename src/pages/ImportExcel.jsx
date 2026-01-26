@@ -21,18 +21,53 @@ const ImportExcel = () => {
 
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
       setExcelData(jsonData);
-      
-       setTimeout(() => navigate("/print"), 200);
+
+      setTimeout(() => navigate("/print"), 200);
     };
     reader.readAsArrayBuffer(file);
   };
+
   return (
-    <div>
-      <div>
-        <h4 class="import-button">Import Excel</h4>
-      </div>
-      <div>
-        <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
+    <div className=" w-full grid place-items-center ">
+      {/* Card */}
+      <div
+        className="
+  w-[340px]
+  rounded-2xl
+  bg-black/40
+  backdrop-blur-xl
+  border border-white/10
+  shadow-xl
+  p-8
+  flex flex-col
+  items-center
+  justify-center
+  gap-6
+"
+      >
+        {/* Title */}
+        <h4 className="text-xl font-semibold text-white tracking-wide ">
+          Import Excel
+        </h4>
+
+        {/* Animated Finger */}
+        <div className="text-5xl animate-finger select-none ">👇</div>
+
+        {/* File Input */}
+        <label
+          className="w-75 cursor-pointer rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 transition px-4 py-3 text-center text-white text-sm "
+        >
+          Choose Excel File
+          <input
+            type="file"
+            accept=".xlsx, .xls"
+            onChange={handleFileUpload}
+            className="hidden"
+          />
+        </label>
+
+        {/* Helper Text */}
+        <p className="text-xs text-white/60">Supported: .xlsx, .xls</p>
       </div>
     </div>
   );
