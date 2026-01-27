@@ -102,8 +102,9 @@ export default function PrintPageMatalanNew() {
         pageEl.style.width = "210mm";
         pageEl.style.height = "297mm";
 
+        // scale: window.devicePixelRatio || 2,
         const canvas = await html2canvas(pageEl, {
-          scale: window.devicePixelRatio || 2,
+          scale: 2,
           backgroundColor: "#ffffff",
           useCORS: true,
           logging: false,
