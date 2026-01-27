@@ -217,7 +217,7 @@ export default function PrintPageMatalanNew() {
       {/* Pages */}
       <div
         ref={containerRef}
-        className="flex flex-col items-center gap-6 py-6 print:bg-white"
+        className="flex flex-col items-start gap-6 py-6 print:bg-white"
       >
         {pages.map((pageData, pageIndex) => {
           const rows = rowsFromPage(pageData);
