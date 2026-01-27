@@ -22,7 +22,7 @@ const ImportExcel = () => {
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
       setExcelData(jsonData);
 
-      setTimeout(() => navigate("/print-matalan"), 200);
+      setTimeout(() => navigate("/print"), 200);
     };
     reader.readAsArrayBuffer(file);
   };

@@ -10,9 +10,9 @@ function App() {
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="print" element={<PrintPage />} />
+        {/* <Route path="print" element={<PrintPage />} /> */}
         <Route path="print-enza" element={<PrintPageForEnza />} />
-        <Route path="print-matalan" element={<PrintPageMatalanNew />} />
+        <Route path="print" element={<PrintPageMatalanNew />} />
       </Routes>
     </>
   );

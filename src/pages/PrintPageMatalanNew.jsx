@@ -15,7 +15,11 @@ export default function PrintPageMatalanNew() {
   const { excelData } = useContext(ExcelContext);
   const containerRef = useRef(null);
 
+  const [barcodeImage, setBarcodeImage] = useState(true);
   const [priceOnly, setPriceOnly] = useState(false);
+  const [articCodeAndBarciodeImage, SetarticCodeAndBarciodeImage] =
+    useState(false);
+  const [articCodeAndBarciode, SetarticCodeAndBarciode] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
   /* ---------- prices ---------- */
@@ -103,11 +107,18 @@ export default function PrintPageMatalanNew() {
           backgroundColor: "#ffffff",
           useCORS: true,
           logging: false,
-          imageTimeout: 0,
-          removeContainer: true,
-          foreignObjectRendering: false,
-          windowWidth: pageEl.scrollWidth,
-          windowHeight: pageEl.scrollHeight,
+
+          onclone: (clonedDoc) => {
+            clonedDoc.querySelectorAll(".force-rotate-left").forEach((el) => {
+              el.style.transform = "rotate(-90deg)";
+              el.style.transformOrigin = "center center";
+            });
+
+            clonedDoc.querySelectorAll(".force-rotate-right").forEach((el) => {
+              el.style.transform = "rotate(90deg)";
+              el.style.transformOrigin = "center center";
+            });
+          },
         });
 
         const imgData = canvas.toDataURL("image/png");
@@ -123,7 +134,9 @@ export default function PrintPageMatalanNew() {
   };
 
   /* ---------- render ---------- */
-
+  console.log("artic", articCodeAndBarciode);
+  console.log("barcodeImage", barcodeImage);
+  console.log("artic", articCodeAndBarciode);
   return (
     <div className="relative bg-neutral-100 min-h-screen">
       {/* Controls */}
@@ -137,16 +150,68 @@ export default function PrintPageMatalanNew() {
         >
           {isGenerating ? "Generating…" : "Generate PDF"}
         </button>
-
-        <label className="flex gap-2 items-center">
-          <input
-            type="checkbox"
-            checked={priceOnly}
-            disabled={isGenerating}
-            onChange={() => setPriceOnly(!priceOnly)}
-          />
-          Print prices only
-        </label>
+        <div className="flex flex-row justify-between items-center gap-10">
+          <label className="flex gap-2 items-center">
+            <input
+              name="print-option"
+              type="radio"
+              checked={barcodeImage}
+              disabled={isGenerating}
+              onChange={() => {
+                setBarcodeImage(true);
+                SetarticCodeAndBarciode(false);
+                setPriceOnly(false);
+                SetarticCodeAndBarciodeImage(false);
+              }}
+            />
+            Barcode(img) - Barcode - price
+          </label>
+          <label className="flex gap-2 items-center">
+            <input
+              name="print-option"
+              type="radio"
+              checked={priceOnly}
+              disabled={isGenerating}
+              onChange={() => {
+                setPriceOnly(true);
+                SetarticCodeAndBarciode(false);
+                setBarcodeImage(false);
+                SetarticCodeAndBarciodeImage(false);
+              }}
+            />
+            Prices only
+          </label>
+          <label className="flex gap-2 items-center">
+            <input
+              name="print-option"
+              type="radio"
+              checked={articCodeAndBarciodeImage}
+              disabled={isGenerating}
+              onChange={() => {
+                SetarticCodeAndBarciodeImage(true);
+                SetarticCodeAndBarciode(false);
+                setBarcodeImage(false);
+                setPriceOnly(false);
+              }}
+            />
+            Barcode - Artic Code - Price
+          </label>
+          <label className="flex gap-2 items-center">
+            <input
+              name="print-option"
+              type="radio"
+              checked={articCodeAndBarciode}
+              disabled={isGenerating}
+              onChange={() => {
+                SetarticCodeAndBarciode(true);
+                setBarcodeImage(false);
+                setPriceOnly(false);
+                SetarticCodeAndBarciodeImage(false);
+              }}
+            />
+            Barcode - Artic Code - Price
+          </label>
+        </div>
       </div>
 
       {/* Pages */}
@@ -189,47 +254,65 @@ export default function PrintPageMatalanNew() {
                             className="relative border flex items-center justify-center"
                             style={{ height: CELL_H }}
                           >
-                            <p
+                            <div
                               className="
-                              absolute top-1/2 left-0
-                              -translate-y-1/2 translate-x-[22%]
-                              rotate-[-90deg]
-                              font-bold text-[16px] ml-3
-                            "
+    force-rotate-left
+    absolute top-1/2 left-0
+    -translate-y-1/2 translate-x-[22%]
+    font-bold text-[16px]
+    ml-1.5
+  "
                             >
                               {item.left && `${item.left}₾`}
-                            </p>
-                            <p
+                            </div>
+
+                            <div
                               className="
-                              absolute top-1/2 right-0
-                              -translate-y-1/2 -translate-x-[22%]
-                              rotate-[90deg]
-                              font-bold text-[16px] mr-3
-                            "
+    force-rotate-right
+    absolute top-1/2 right-0
+    -translate-y-1/2 -translate-x-[22%]
+    font-bold text-[16px] ml-1.5
+  "
                             >
                               {item.right && `${item.right}₾`}
-                            </p>
+                            </div>
                           </div>
                         );
                       }
 
-                      console.log(item["Adjusted Shablon unit price"]);
-                      if (item["Adjusted Shablon unit price"]) {
-                        return (
-                          <div
-                            key={i}
-                            className="relative border flex flex-col items-center justify-center"
-                            style={{ height: CELL_H }}
-                          >
-                            <div className="mt-1 w-full absolute left-[50%] top-0 -translate-x-[50%] ">
-                              <BarcodeCell value={item["Barcode"]} />
+                      if (barcodeImage) {
+                        if (item["Adjusted Shablon unit price"]) {
+                          return (
+                            <div
+                              key={i}
+                              className="relative border flex flex-col items-center justify-center"
+                              style={{ height: CELL_H }}
+                            >
+                              <div className=" w-full absolute left-[50%] top-0 -translate-x-[50%] ">
+                                <BarcodeCell value={item["Barcode"]} />
+                              </div>
+                              <p className="mb-4 absolute left-[50%] bottom-0 -translate-x-[50%]  text-[20px] font-bold mt-[5px]">
+                                {item["Adjusted Shablon unit price"]}₾
+                              </p>
                             </div>
-                            <p className="mb-1 absolute left-[50%] bottom-0 -translate-x-[50%]  text-[20px] font-bold mt-[5px]">
+                          );
+                        } else {
+                          return (
+                            <div
+                              key={i}
+                              className="relative border flex flex-col items-center justify-center"
+                              style={{ height: CELL_H }}
+                            >
+                              <div className="w-full absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
+                                <BarcodeCell value={item["Barcode"]} />
+                              </div>
+                              {/* <p className="text-[20px] font-bold mt-[5px]">
                               {item["Adjusted Shablon unit price"]}₾
-                            </p>
-                          </div>
-                        );
-                      } else {
+                            </p> */}
+                            </div>
+                          );
+                        }
+                      } else if (articCodeAndBarciodeImage) {
                         return (
                           <div
                             key={i}
@@ -240,8 +323,26 @@ export default function PrintPageMatalanNew() {
                               <BarcodeCell value={item["Barcode"]} />
                             </div>
                             {/* <p className="text-[20px] font-bold mt-[5px]">
-                            {item["Adjusted Shablon unit price"]}₾
-                          </p> */}
+                              {item["Adjusted Shablon unit price"]}₾
+                            </p> */}
+                          </div>
+                        );
+                      } else if (articCodeAndBarciode) {
+                        return (
+                          <div
+                            key={i}
+                            className="relative border flex flex-col items-center justify-center"
+                            style={{ height: CELL_H }}
+                          >
+                            <p className="font-semibold text-sm">
+                              {item["Barcode"]}
+                            </p>
+                            <p className="font-semibold text-sm">
+                              {item["Sku Code"]}
+                            </p>
+                            <p className="text-[20px] font-bold mb-5" style={{color: "red"}}>
+                              {item["Adjusted Shablon unit price"]}₾
+                            </p>
                           </div>
                         );
                       }
