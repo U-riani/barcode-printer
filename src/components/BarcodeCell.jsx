@@ -11,7 +11,7 @@ export default function BarcodeCell({ value }) {
       <Barcode
         value={clean}
         format="CODE128"
-        width={0.9}
+        width={1.1}
         height={20}
         fontSize={10}
         displayValue={true}
