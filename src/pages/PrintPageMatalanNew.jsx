@@ -231,7 +231,7 @@ export default function PrintPageMatalanNew() {
                 w-[210mm]
                 h-[297mm]
                 bg-white
-                p-[11mm_10mm]
+                p-[11mm_5mm]
                 box-border
                 shadow
                 print:shadow-none
