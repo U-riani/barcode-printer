@@ -49,7 +49,7 @@
 
 
 .price-line {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   margin-bottom: 20px; /* similar to mb-5 */
   color: #000;
@@ -77,8 +77,8 @@
   padding: 1px 4px;
 
   /* smaller than main */
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 16px;
+  font-weight: 700;
 
   /* lift it a bit like superscript */
   transform: translateY(-4px);
