@@ -51,6 +51,7 @@
 .price-line {
   font-size: 25px;
   font-weight: 700;
+  font-style: italic;
   margin-bottom: 20px; /* similar to mb-5 */
   color: #000;
   line-height: 1;
@@ -79,7 +80,7 @@
   /* smaller than main */
   font-size: 16px;
   font-weight: 700;
-
+  font-style: italic;
   /* lift it a bit like superscript */
   transform: translateY(-4px);
   line-height: 1;
