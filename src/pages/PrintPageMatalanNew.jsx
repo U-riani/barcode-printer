@@ -99,7 +99,7 @@ export default function PrintPageMatalanNew() {
         const pageEl = pagesEls[i];
 
         // force exact size before capture
-        pageEl.style.width = "280mm";
+        pageEl.style.width = "210mm";
         pageEl.style.height = "297mm";
 
         // scale: window.devicePixelRatio || 2,
@@ -242,7 +242,7 @@ export default function PrintPageMatalanNew() {
                 {rows.map((row, r) => (
                   <div
                     key={r}
-                    className="grid grid-cols-5"
+                    className="grid grid-cols-5 gap-[3mm]"
                     style={{ height: CELL_H }}
                   >
                     {row.map((item, i) => {
