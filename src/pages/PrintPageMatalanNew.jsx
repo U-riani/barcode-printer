@@ -167,7 +167,7 @@ export default function PrintPageMatalanNew() {
             />
             Barcode(img) - Barcode - price
           </label>
-          <label className="flex gap-2 items-center">
+          {/* <label className="flex gap-2 items-center">
             <input
               name="print-option"
               type="radio"
@@ -181,8 +181,8 @@ export default function PrintPageMatalanNew() {
               }}
             />
             Prices only
-          </label>
-          <label className="flex gap-2 items-center">
+          </label> */}
+          {/* <label className="flex gap-2 items-center">
             <input
               name="print-option"
               type="radio"
@@ -196,7 +196,7 @@ export default function PrintPageMatalanNew() {
               }}
             />
             Barcode - Artic Code - Price
-          </label>
+          </label> */}
           <label className="flex gap-2 items-center">
             <input
               name="print-option"
@@ -210,7 +210,7 @@ export default function PrintPageMatalanNew() {
                 SetarticCodeAndBarciodeImage(false);
               }}
             />
-            Barcode - Artic Code - Price
+            Price
           </label>
         </div>
       </div>
@@ -335,13 +335,13 @@ export default function PrintPageMatalanNew() {
                             className="relative border  border-white flex flex-col items-center justify-center"
                             style={{ height: CELL_H }}
                           >
-                            <p className="font-semibold text-sm">
+                            {/* <p className="font-semibold text-sm">
                               {item["Barcode"]}
                             </p>
                             <p className="font-semibold text-sm">
                               {item["Sku Code"]}
-                            </p>
-                            <p className="text-[20px] font-bold mb-5" style={{color: "red"}}>
+                            </p> */}
+                            <p className="text-[20px] font-bold mb-5" style={{color: "black"}}>
                               {item["Adjusted Shablon unit price"]}₾
                             </p>
                           </div>
