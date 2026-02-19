@@ -99,7 +99,7 @@ export default function PrintPageMatalanNew() {
         const pageEl = pagesEls[i];
 
         // force exact size before capture
-        pageEl.style.width = "260mm";
+        pageEl.style.width = "280mm";
         pageEl.style.height = "297mm";
 
         // scale: window.devicePixelRatio || 2,
