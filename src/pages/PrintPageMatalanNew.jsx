@@ -286,7 +286,7 @@ export default function PrintPageMatalanNew() {
                           return (
                             <div
                               key={i}
-                              className="relative border flex flex-col items-center justify-center"
+                              className="relative border border-white flex flex-col items-center justify-center"
                               style={{ height: CELL_H }}
                             >
                               <div className=" w-full absolute left-[50%] top-0 -translate-x-[50%] ">
@@ -301,7 +301,7 @@ export default function PrintPageMatalanNew() {
                           return (
                             <div
                               key={i}
-                              className="relative border flex flex-col items-center justify-center"
+                              className="relative border border-white flex flex-col items-center justify-center"
                               style={{ height: CELL_H }}
                             >
                               <div className="w-full absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
@@ -317,7 +317,7 @@ export default function PrintPageMatalanNew() {
                         return (
                           <div
                             key={i}
-                            className="relative border flex flex-col items-center justify-center"
+                            className="relative border border-white flex flex-col items-center justify-center"
                             style={{ height: CELL_H }}
                           >
                             <div className="w-full absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
@@ -332,7 +332,7 @@ export default function PrintPageMatalanNew() {
                         return (
                           <div
                             key={i}
-                            className="relative border flex flex-col items-center justify-center"
+                            className="relative border  border-white flex flex-col items-center justify-center"
                             style={{ height: CELL_H }}
                           >
                             <p className="font-semibold text-sm">
@@ -353,7 +353,7 @@ export default function PrintPageMatalanNew() {
                       Array.from({ length: COLS - row.length }).map((_, i) => (
                         <div
                           key={i}
-                          className="border"
+                          className="border border-white"
                           style={{ height: CELL_H }}
                         />
                       ))}
