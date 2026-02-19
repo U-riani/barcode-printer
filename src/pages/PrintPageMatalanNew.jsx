@@ -134,6 +134,22 @@ export default function PrintPageMatalanNew() {
     }
   };
 
+  const PriceLabel = ({ value }) => {
+    if (value === null || value === undefined || value === "") return null;
+
+    // Normalize to a number and force 2 decimals
+    const num = Number(String(value).replace(",", "."));
+    if (Number.isNaN(num)) return <span>{value}</span>;
+
+    const [intPart, decPart] = num.toFixed(2).split(".");
+    return (
+      <span className="price-wrap">
+        <span className="price-int">{intPart}</span>
+        <span className="price-dec-box">{decPart}</span>
+      </span>
+    );
+  };
+
   /* ---------- render ---------- */
   console.log("artic", articCodeAndBarciode);
   console.log("barcodeImage", barcodeImage);
@@ -341,8 +357,13 @@ export default function PrintPageMatalanNew() {
                             <p className="font-semibold text-sm">
                               {item["Sku Code"]}
                             </p> */}
-                            <p className="text-[20px] font-bold mb-5" style={{color: "black"}}>
-                              {item["Adjusted Shablon unit price"]}₾
+                            {/* <p className="text-[20px] font-bold mb-5" style={{color: "black"}}>
+                              {item["Adjusted Shablon unit price"]}
+                            </p> */}
+                            <p className="price-line">
+                              <PriceLabel
+                                value={item["Adjusted Shablon unit price"]}
+                              />
                             </p>
                           </div>
                         );

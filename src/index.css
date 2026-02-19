@@ -46,3 +46,44 @@
 .animate-press {
   animation: pressVibrate 0.35s linear infinite;
 }
+
+
+.price-line {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px; /* similar to mb-5 */
+  color: #000;
+  line-height: 1;
+}
+
+.price-wrap {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.price-int {
+  letter-spacing: 0.2px;
+}
+
+.price-dec-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* box look */
+  border-radius: 4px;
+
+  /* make it "badge-like" */
+  padding: 1px 4px;
+
+  /* smaller than main */
+  font-size: 12px;
+  font-weight: 800;
+
+  /* lift it a bit like superscript */
+  transform: translateY(-4px);
+  line-height: 1;
+  min-width: 18px;
+}
+
+
