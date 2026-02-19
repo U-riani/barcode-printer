@@ -360,7 +360,7 @@ export default function PrintPageMatalanNew() {
                             {/* <p className="text-[20px] font-bold mb-5" style={{color: "black"}}>
                               {item["Adjusted Shablon unit price"]}
                             </p> */}
-                            <p className="price-line">
+                            <p className="price-line ps-2">
                               <PriceLabel
                                 value={item["Adjusted Shablon unit price"]}
                               />
