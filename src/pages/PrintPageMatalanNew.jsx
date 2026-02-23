@@ -305,12 +305,10 @@ export default function PrintPageMatalanNew() {
                               className="relative border border-white flex flex-col items-center justify-center"
                               style={{ height: CELL_H }}
                             >
-                              <div className=" w-full absolute left-[50%] top-0 -translate-x-[50%] ">
+                              <div className=" w-full absolute left-[50%] top-[20px] -translate-x-[50%] ">
                                 <BarcodeCell value={item["Barcode"]} />
                               </div>
-                              <p className="mb-4 absolute left-[50%] bottom-0 -translate-x-[50%]  text-[20px] font-bold mt-[5px]">
-                                {item["Adjusted Shablon unit price"]}₾
-                              </p>
+                              
                             </div>
                           );
                         } else {
