@@ -198,7 +198,7 @@ export default function PrintPageForEnza() {
                           </div>
 
                           <p
-                            className="relative z-10 text-[6px] leading-tight text-center break-words px-0.5"
+                            className="relative z-10 h-7.5 text-[6px] leading-tight text-center break-words px-0.5"
                             style={{
                               maxWidth: "100%",
                               lineHeight: 1.1,
