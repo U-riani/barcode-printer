@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useMemo,
-} from "react";
+import React, { useContext, useEffect, useRef, useState, useMemo } from "react";
 import { ExcelContext } from "../context/ExcelContext";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -27,9 +21,7 @@ export default function PrintPageForEnza() {
 
   const allPrices = useMemo(
     () =>
-      excelData
-        .map((i) => i["Adjusted Shablon unit price"])
-        .filter(Boolean),
+      excelData.map((i) => i["Adjusted Shablon unit price"]).filter(Boolean),
     [excelData],
   );
 
@@ -198,11 +190,22 @@ export default function PrintPageForEnza() {
                       return (
                         <div
                           key={i}
-                          className="relative border flex flex-col items-center justify-center"
-                          style={{ height: CELL_H }}
+                          className="border flex flex-col items-center justify-center overflow-hidden"
+                          style={{ height: CELL_H, padding: "1.5mm 0mm" }}
                         >
-                          <div className="w-full absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] -mt-1">{BarcodeComponent}</div>
-                          <p className="text-[10px] font-bold mt-[40px] z-10">
+                          <div className="w-full flex justify-center items-center -mt-3">
+                            {BarcodeComponent}
+                          </div>
+
+                          <p
+                            className="text-[6px] h-7.5 text-center break-words -mt-3 px-0.5"
+                            style={{
+                              display: "-webkit-box",
+                              WebkitBoxOrient: "vertical",
+                              overflow: "hidden",
+                              maxWidth: "100%",
+                            }}
+                          >
                             {item["Sku Code"]}
                           </p>
                         </div>
@@ -211,7 +214,11 @@ export default function PrintPageForEnza() {
 
                     {row.length < COLS &&
                       Array.from({ length: COLS - row.length }).map((_, i) => (
-                        <div key={i} className="border" style={{ height: CELL_H }} />
+                        <div
+                          key={i}
+                          className="border"
+                          style={{ height: CELL_H }}
+                        />
                       ))}
                   </div>
                 ))}
