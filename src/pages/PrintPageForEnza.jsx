@@ -201,10 +201,10 @@ export default function PrintPageForEnza() {
                           className="relative border flex flex-col items-center justify-center"
                           style={{ height: CELL_H }}
                         >
-                          <div className="w-full absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">{BarcodeComponent}</div>
-                          {/* <p className="text-[20px] font-bold mt-[5px]">
-                            {item["Adjusted Shablon unit price"]}₾
-                          </p> */}
+                          <div className="w-full absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] -mt-1">{BarcodeComponent}</div>
+                          <p className="text-[10px] font-bold mt-[40px] z-10">
+                            {item["Sku Code"]}
+                          </p>
                         </div>
                       );
                     })}
