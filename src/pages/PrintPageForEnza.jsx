@@ -198,7 +198,7 @@ export default function PrintPageForEnza() {
                           </div>
 
                           <p
-                            className="text-[6px] h-7.5 text-center break-words -mt-3 px-0.5"
+                            className="text-[6px] h-7.5 text-center break-words -mt-3 px-0.5 z-10"
                             style={{
                               display: "-webkit-box",
                               WebkitBoxOrient: "vertical",
