@@ -193,12 +193,12 @@ export default function PrintPageForEnza() {
                           className="relative isolate border flex flex-col items-center justify-center overflow-hidden"
                           style={{ height: CELL_H, padding: "1.5mm 0.8mm" }}
                         >
-                          <div className="relative z-0 w-full flex justify-center items-center -mt-1">
+                          <div className="relative z-0 w-full flex justify-center items-center -mt-3">
                             {BarcodeComponent}
                           </div>
 
                           <p
-                            className="relative z-10 h-7.5 text-[6px]  text-center break-words px-0.5 -mt-1"
+                            className="relative z-10 h-7.5 text-[6px]  text-center break-words px-0.5 -mt-3"
                             style={{
                               maxWidth: "100%",
                               overflow: "hidden",
