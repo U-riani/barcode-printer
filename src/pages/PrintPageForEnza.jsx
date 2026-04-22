@@ -143,18 +143,18 @@ export default function PrintPageForEnza() {
                 w-[210mm]
                 h-[297mm]
                 bg-white
-                p-[11mm_10mm]
+                p-[11mm_5mm]
                 box-border
                 shadow
                 print:shadow-none
                 print:break-after-page
               "
             >
-              <div className="flex flex-col">
+              <div className="flex flex-col ">
                 {rows.map((row, r) => (
                   <div
                     key={r}
-                    className="grid grid-cols-5"
+                    className="grid grid-cols-5 gap-2 "
                     style={{ height: `calc((297mm - 22mm) / 13)` }}
                   >
                     {row.map((item, i) => {
@@ -190,15 +190,15 @@ export default function PrintPageForEnza() {
                       return (
                         <div
                           key={i}
-                          className="relative isolate border flex flex-col items-center justify-center overflow-hidden"
+                          className="relative isolate border  flex flex-col items-center justify-center overflow-hidden"
                           style={{ height: CELL_H, padding: "1.5mm 0.8mm" }}
                         >
-                          <div className="relative z-0 w-full flex justify-center items-center -mt-3">
+                          <div className="relative z-0 w-full flex justify-center items-center -mt-1">
                             {BarcodeComponent}
                           </div>
 
                           <p
-                            className="relative z-10 h-7.5 text-[6px]  text-center break-words px-0.5 -mt-3"
+                            className="relative z-10 h-7.5 text-[6px]  text-center break-words px-0.5 -mt-1.5"
                             style={{
                               maxWidth: "100%",
                               overflow: "hidden",
