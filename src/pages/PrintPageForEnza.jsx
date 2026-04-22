@@ -190,7 +190,7 @@ export default function PrintPageForEnza() {
                       return (
                         <div
                           key={i}
-                          className="relative isolate border  flex flex-col items-center justify-center overflow-hidden"
+                          className="relative isolate   flex flex-col items-center justify-center overflow-hidden"
                           style={{ height: CELL_H, padding: "1.5mm 0.8mm" }}
                         >
                           <div className="relative z-0 w-full flex justify-center items-center -mt-1">
@@ -214,7 +214,7 @@ export default function PrintPageForEnza() {
                       Array.from({ length: COLS - row.length }).map((_, i) => (
                         <div
                           key={i}
-                          className="border"
+                          className=""
                           style={{ height: CELL_H }}
                         />
                       ))}
