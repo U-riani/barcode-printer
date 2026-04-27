@@ -1,7 +1,9 @@
+// src\pages\PrintPageForEnza.jsx
 import React, { useContext, useEffect, useRef, useState, useMemo } from "react";
 import { ExcelContext } from "../context/ExcelContext";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import * as XLSX from "xlsx";
 import { Link } from "react-router-dom";
 import { useBarcode } from "../hooks/useBarcode.jsx";
 
@@ -101,6 +103,14 @@ export default function PrintPageForEnza() {
     } finally {
       setIsGenerating(false);
     }
+  };
+
+  const exportOutputExcel = () => {
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(wb, ws, "Output");
+    XLSX.writeFile(wb, "enza-output-with-locations.xlsx");
   };
 
   /* ---------- render ---------- */
@@ -212,11 +222,7 @@ export default function PrintPageForEnza() {
 
                     {row.length < COLS &&
                       Array.from({ length: COLS - row.length }).map((_, i) => (
-                        <div
-                          key={i}
-                          className=""
-                          style={{ height: CELL_H }}
-                        />
+                        <div key={i} className="" style={{ height: CELL_H }} />
                       ))}
                   </div>
                 ))}
@@ -225,7 +231,13 @@ export default function PrintPageForEnza() {
           );
         })}
       </div>
-
+      <button
+        onClick={exportOutputExcel}
+        disabled={isGenerating}
+        className="px-3 py-1 border rounded"
+      >
+        Export Excel
+      </button>
       {isGenerating && (
         <div className="fixed inset-0 bg-white/80 flex flex-col items-center justify-center z-50">
           <div className="animate-spin h-8 w-8 border-4 border-black border-t-transparent rounded-full" />
