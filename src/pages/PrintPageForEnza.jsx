@@ -19,6 +19,12 @@ export default function PrintPageForEnza() {
   const [priceOnly, setPriceOnly] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const [paperType, setPaperType] = useState("1");
+
+  const handlePaperTypeChange = (e) => {
+    setPaperType(e.target.value);
+  };
+
   /* ---------- prices ---------- */
 
   const allPrices = useMemo(
@@ -120,7 +126,6 @@ export default function PrintPageForEnza() {
       {/* Controls */}
       <div className="sticky top-0 z-10 bg-white border-b px-4 py-2 flex gap-4 items-center">
         <Link to="/">⬅ Back</Link>
-
         <button
           onClick={generatePDF}
           disabled={isGenerating}
@@ -128,16 +133,20 @@ export default function PrintPageForEnza() {
         >
           {isGenerating ? "Generating…" : "Generate PDF"}
         </button>
-
-        <label className="flex gap-2 items-center">
-          <input
-            type="checkbox"
-            checked={priceOnly}
-            disabled={isGenerating}
-            onChange={() => setPriceOnly(!priceOnly)}
-          />
-          Print prices only
-        </label>
+        <div className=" text-xs flex items-center gap-1">
+          <p className="text-xs text-orange-700 font-bold">!!   აირჩიეთ საბეჭდი ფურცლის სტიკერის ფორმა   !! : </p>
+          <select value={paperType} onChange={handlePaperTypeChange} className="border">
+            <option value="1">კუთხოვანი</option>
+            <option value="2">მომრგვალებული</option>
+          </select> 
+        </div>
+        <button
+          onClick={exportOutputExcel}
+          disabled={isGenerating}
+          className="ms-auto px-3 py-1 border rounded"
+        >
+          Export Excel
+        </button>
       </div>
 
       {/* Pages */}
@@ -149,51 +158,25 @@ export default function PrintPageForEnza() {
             <div
               key={pageIndex}
               id={`page-${pageIndex}`}
-              className="
+              className={`
                 w-[210mm]
                 h-[297mm]
                 bg-white
-                p-[11mm_5mm]
+                ${paperType === "1" ? "p-[11mm_10mm]" : "p-[11mm_5mm]"}
                 box-border
                 shadow
                 print:shadow-none
                 print:break-after-page
-              "
+              `}
             >
               <div className="flex flex-col ">
                 {rows.map((row, r) => (
                   <div
                     key={r}
-                    className="grid grid-cols-5 gap-2 "
+                    className={`grid grid-cols-5 ${paperType == "1" ? "gap-0" : "gap-2"}`}
                     style={{ height: `calc((297mm - 22mm) / 13)` }}
                   >
                     {row.map((item, i) => {
-                      // if (priceOnly) {
-                      //   return (
-                      //     <div
-                      //       key={i}
-                      //       className="relative border flex items-center justify-center"
-                      //       style={{ height: CELL_H }}
-                      //     >
-                      //       <p className="
-                      //         absolute top-1/2 left-0
-                      //         -translate-y-1/2 translate-x-[22%]
-                      //         rotate-[-90deg]
-                      //         font-bold text-[16px]
-                      //       ">
-                      //         {item.left && `${item.left}₾`}
-                      //       </p>
-                      //       <p className="
-                      //         absolute top-1/2 right-0
-                      //         -translate-y-1/2 -translate-x-[22%]
-                      //         rotate-[90deg]
-                      //         font-bold text-[16px]
-                      //       ">
-                      //         {item.right && `${item.right}₾`}
-                      //       </p>
-                      //     </div>
-                      //   );
-                      // }
 
                       const { BarcodeComponent } = useBarcode(item["Barcode"]);
 
@@ -203,18 +186,19 @@ export default function PrintPageForEnza() {
                           className="relative isolate   flex flex-col items-center justify-center overflow-hidden"
                           style={{ height: CELL_H, padding: "1.5mm 0.8mm" }}
                         >
-                          <div className="relative z-0 w-full flex justify-center items-center -mt-1">
+                          <div className={`relative z-0 w-full flex justify-center items-center ${paperType === '1' ? "mt-0" : "-mt-1"} `}>
                             {BarcodeComponent}
                           </div>
 
                           <p
-                            className="relative z-10 h-7.5 text-[6px]  text-center break-words px-0.5 -mt-1.5"
+                            className={`relative z-10 h-7.5 text-[6px]  text-center break-words px-0.5 ${paperType === '1' ? "-mt-1.5" : "-mt-1.5"}`}
                             style={{
                               maxWidth: "100%",
                               overflow: "hidden",
                             }}
                           >
-                            {item["Sku Code"]}
+                            {item["Sku Code"]} <br />
+                            <span className="font-bold text-[7px]">{item["Adjusted Shablon unit price"]} ₾</span>
                           </p>
                         </div>
                       );
@@ -231,13 +215,7 @@ export default function PrintPageForEnza() {
           );
         })}
       </div>
-      <button
-        onClick={exportOutputExcel}
-        disabled={isGenerating}
-        className="px-3 py-1 border rounded"
-      >
-        Export Excel
-      </button>
+
       {isGenerating && (
         <div className="fixed inset-0 bg-white/80 flex flex-col items-center justify-center z-50">
           <div className="animate-spin h-8 w-8 border-4 border-black border-t-transparent rounded-full" />
